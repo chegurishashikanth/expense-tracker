@@ -11,29 +11,30 @@ const Login = () => {
     setShowPassword((prevState) => !prevState);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+  // In Login.jsx, update the handleSubmit function:
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const email = e.target.email.value;
+  const password = e.target.password.value;
 
-    try {
-      // Send login request to the backend
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
-        email,
-        password,
-      });
+  try {
+    const response = await axios.post("http://localhost:5000/api/auth/login", {
+      email,
+      password,
+    });
 
-      // If login is successful
-      alert(response.data.message); // e.g., "Login successful"
-      setErrorMessage("");
-      window.location.href = "/home"; // Redirect to dashboard or any other page
-    } catch (error) {
-      // Handle login errors
-      setErrorMessage(
-        error.response?.data?.message || "User does not exist or invalid credentials"
-      );
-    }
-  };
+    // Store token and user data
+    localStorage.setItem('token', response.data.token);
+    localStorage.setItem('userData', JSON.stringify(response.data.user));
+    
+    setErrorMessage("");
+    window.location.href = "/home";
+  } catch (error) {
+    setErrorMessage(
+      error.response?.data?.message || "User does not exist or invalid credentials"
+    );
+  }
+};
 
   return (
     <div className="container">
