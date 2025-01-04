@@ -42,7 +42,9 @@ const Home = () => {
         <button onClick={handleLogout} className="logout-button">Logout</button>
       </nav>
       <div className="content">
-        {/* Add your content here */}
+        <div className="inner-content">
+          {/* Add your content here */}
+        </div>
       </div>
     </div>
   );
