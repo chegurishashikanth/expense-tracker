@@ -42,8 +42,9 @@ const Home = () => {
         <button onClick={handleLogout} className="logout-button">Logout</button>
       </nav>
       <div className="content">
-        <div className="inner-content">
-          {/* Add your content here */}
+        <div className="overview-box">
+          <h2>All Transactions</h2>
+          {/* Add chart or content here */}
         </div>
       </div>
     </div>

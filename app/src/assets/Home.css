@@ -56,24 +56,8 @@ body {
   border-radius: 8px;
 }
 
-.content {
-  margin-left: 240px;
-  padding: 20px;
-  flex: 1;
-  background-color: white;
-  color: black;
-  height: calc(100vh - 40px);
-  box-sizing: border-box;
-}
-
-.inner-content {
-  padding: 20px;
-  background-color: white;
-  height: 100%;
-}
-
 .logout-button {
-  margin: 20px ;
+  margin: 20px;
   padding: 10px 20px;
   background-color: #ff4d4f;
   color: white;
@@ -86,4 +70,23 @@ body {
 
 .logout-button:hover {
   background-color: #d9363e;
+}
+
+.content {
+  margin-left: 240px;
+  padding: 20px;
+  flex: 1;
+  background-color: white;
+  color: black;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.overview-box {
+  background-color: #f8f9fb;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  height: 100%;
+  box-sizing: border-box;
 }
