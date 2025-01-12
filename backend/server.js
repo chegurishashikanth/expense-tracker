@@ -11,7 +11,7 @@ connectDB(); // Connect to MongoDB Atlas
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-
+app.use("/api/income", require("./routes/income"));
 // Test route
 app.get("/", (req, res) => {
   res.send("API is running...");
