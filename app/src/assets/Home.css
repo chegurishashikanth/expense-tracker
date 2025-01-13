@@ -91,3 +91,149 @@ body {
   box-sizing: border-box;
 }
 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  gap: 20px;
+}
+
+input {
+  padding: 15px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 15px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.income-section, .expense-section {
+  display: flex;
+  gap: 20px;
+}
+
+.income-form, .expense-form {
+  width: 40%;
+  background-color: #f8f9fb;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.income-list, .expense-list {
+  width: 60%;
+  max-height: 400px; /* Set a maximum height */
+  overflow-y: auto;  /* Make only the list scrollable */
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.total-summary {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.income-item, .expense-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f8f9fb;
+}
+
+.action-buttons button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #d9363e;
+}
+
+.overview-box {
+  background-color: #f8f9fb;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  height: 150px;
+  width: 1000px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid #e0e0e0;
+}
+
+.dashboard-summary {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 20px;
+}
+
+.summary-item {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  position: relative;
+}
+
+.summary-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 1px;
+  background-color: #ccc;
+}
+
+.summary-item p {
+  margin: 5px 0 0;
+  font-size: 24px;
+  color: #333;
+}

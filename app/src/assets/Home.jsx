@@ -236,9 +236,6 @@ const Home = () => {
         {activeTab === 'income' && (
           <div className="income-section">
             <h2>Add New Income</h2>
-            <div className="total-summary">
-              Total Income: ${calculateTotal(incomes).toFixed(2)}
-            </div>
             <form onSubmit={handleIncomeSubmit} className="income-form">
               <input
                 type="text"
@@ -263,7 +260,7 @@ const Home = () => {
                 onChange={(e) => setIncomeForm({...incomeForm, amount: e.target.value})}
                 required
               />
-              <textarea
+              <input
                 name="description"
                 placeholder="Description"
                 value={incomeForm.description}
@@ -295,6 +292,9 @@ const Home = () => {
             {error && <p className="error-message">{error}</p>}
             
             <div className="income-list">
+            <div className="total-summary">
+              Total Income: ${calculateTotal(incomes).toFixed(2)}
+            </div>
               <h3>Recent Incomes</h3>
               {incomes.map((income) => (
                 <div key={income._id} className="income-item">
@@ -325,9 +325,6 @@ const Home = () => {
         {activeTab === 'expenses' && (
           <div className="expense-section">
             <h2>Add New Expense</h2>
-            <div className="total-summary">
-              Total Expenses: ${calculateTotal(expenses).toFixed(2)}
-            </div>
             <form onSubmit={handleExpenseSubmit} className="expense-form">
               <input
                 type="text"
@@ -352,7 +349,7 @@ const Home = () => {
                 onChange={(e) => setExpenseForm({...expenseForm, amount: e.target.value})}
                 required
               />
-              <textarea
+              <input
                 name="description"
                 placeholder="Description"
                 value={expenseForm.description}
@@ -384,6 +381,9 @@ const Home = () => {
             {error && <p className="error-message">{error}</p>}
             
             <div className="expense-list">
+              <div className="total-summary">
+              Total Expenses: ${calculateTotal(expenses).toFixed(2)}
+            </div>
               <h3>Recent Expenses</h3>
               {expenses.map((expense) => (
                 <div key={expense._id} className="expense-item">
@@ -413,7 +413,6 @@ const Home = () => {
 
         {activeTab === 'dashboard' && (
           <div className="overview-box">
-            <h2>Financial Overview</h2>
             <div className="dashboard-summary">
               <div className="summary-card">
                 <h3>Total Income</h3>
