@@ -1,11 +1,36 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Pie, Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+} from "chart.js";
 import "./Home.css";
+
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement
+);
 
 const Home = () => {
   const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState("dashboard");
+  const [data, setData] = useState({});
+  const [lineData, setLineData] = useState({});
   const [incomeForm, setIncomeForm] = useState({
     name: "",
     date: "",
@@ -25,15 +50,46 @@ const Home = () => {
   const [editingExpense, setEditingExpense] = useState(null);
   const navigate = useNavigate();
 
+  
   useEffect(() => {
     const userData = localStorage.getItem("userData");
     const token = localStorage.getItem("token");
+
+    axios.get('/api/expenses').then(response => {
+      setData(response.data);
+    });
+
+    axios.get('/api/income-expenses').then(response => {
+      const { months, income, expenses } = response.data;
+      setLineData({
+        labels: months,
+        datasets: [
+          {
+            label: 'Income',
+            data: income,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            fill: true,
+          },
+          {
+            label: 'Expenses',
+            data: expenses,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            fill: true,
+          },
+        ],
+      });
+    });
+    
+
 
     if (!token || !userData) {
       navigate("/");
       return;
     }
 
+    
     setUser(JSON.parse(userData));
     fetchIncomes();
     fetchExpenses();
@@ -92,6 +148,24 @@ const Home = () => {
     } catch (error) {
       setError(error.response?.data?.message || "Error with income");
     }
+  };
+
+  const calculateIncomeCategories = (incomes) => {
+    const categories = {};
+    incomes.forEach((income) => {
+      categories[income.name] =
+        (categories[income.name] || 0) + parseFloat(income.amount);
+    });
+    return categories;
+  };
+
+  const calculateExpenseCategories = (expenses) => {
+    const categories = {};
+    expenses.forEach((expense) => {
+      categories[expense.name] =
+        (categories[expense.name] || 0) + parseFloat(expense.amount);
+    });
+    return categories;
   };
 
   const handleExpenseSubmit = async (e) => {
@@ -485,6 +559,119 @@ const Home = () => {
                 <option value="this-year">This Year</option>
                 <option value="all">All</option>
               </select>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <div
+                className="chart-container"
+                style={{ width: "225px", height: "225px", margin: "20px" }}
+              >
+                <Pie
+                  data={{
+                    labels: ["Income", "Expenses"],
+                    datasets: [
+                      {
+                        data: [
+                          calculateTotal(incomes),
+                          calculateTotal(expenses),
+                        ],
+                        backgroundColor: ["#4CAF50", "#f44336"],
+                        borderColor: ["#43A047", "#E53935"],
+                        borderWidth: 1,
+                      },
+                    ],
+                  }}
+                  options={{
+                    plugins: {
+                      title: {
+                        display: true,
+                        text: "Income vs Expenses",
+                      },
+                    },
+                  }}
+                />
+              </div>
+
+              <div
+                className="chart-container"
+                style={{ width: "225px", height: "225px", margin: "20px" }}
+              >
+                <Pie
+                  data={{
+                    labels: Object.keys(calculateIncomeCategories(incomes)),
+                    datasets: [
+                      {
+                        data: Object.values(calculateIncomeCategories(incomes)),
+                        backgroundColor: [
+                          "#4CAF50",
+                          "#81C784",
+                          "#A5D6A7",
+                          "#C8E6C9",
+                        ],
+                        borderColor: [
+                          "#43A047",
+                          "#66BB6A",
+                          "#81C784",
+                          "#A5D6A7",
+                        ],
+                        borderWidth: 1,
+                      },
+                    ],
+                  }}
+                  options={{
+                    plugins: {
+                      title: {
+                        display: true,
+                        text: "Income Categories",
+                      },
+                    },
+                  }}
+                />
+              </div>
+
+              <div
+                className="chart-container"
+                style={{ width: "225px", height: "225px", margin: "20px" }}
+              >
+                <Pie
+                  data={{
+                    labels: Object.keys(calculateExpenseCategories(expenses)),
+                    datasets: [
+                      {
+                        data: Object.values(
+                          calculateExpenseCategories(expenses)
+                        ),
+                        backgroundColor: [
+                          "#f44336",
+                          "#EF5350",
+                          "#E57373",
+                          "#EF9A9A",
+                        ],
+                        borderColor: [
+                          "#E53935",
+                          "#EF5350",
+                          "#E57373",
+                          "#EF9A9A",
+                        ],
+                        borderWidth: 1,
+                      },
+                    ],
+                  }}
+                  options={{
+                    plugins: {
+                      title: {
+                        display: true,
+                        text: "Expense Categories",
+                      },
+                    },
+                  }}
+                />
+              </div>
             </div>
           </div>
         )}

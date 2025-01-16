@@ -360,10 +360,10 @@ form button[type="submit"]:hover {
 /* Visualization section */
 .visualization-section {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+  justify-content: flex-start;
   margin-top: 24px;
-  padding: 0 24px;
+  padding: 0 24px 0 0;
 }
 
 .visualization-heading {
@@ -373,6 +373,12 @@ form button[type="submit"]:hover {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.chart-container {
+  width: 200px;
+  height: 200px;
+  margin: 20px 0;
 }
 
 .visualization-dropdown {
