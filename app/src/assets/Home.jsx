@@ -325,10 +325,16 @@ const Home = () => {
                     <p>{income.description}</p>
                   </div>
                   <div className="action-buttons">
-                    <button onClick={() => handleIncomeEdit(income)} className="edit-button">
+                    <button
+                      onClick={() => handleIncomeEdit(income)}
+                      className="edit-button"
+                    >
                       Edit
                     </button>
-                    <button onClick={() => handleIncomeDelete(income._id)} className="delete-button">
+                    <button
+                      onClick={() => handleIncomeDelete(income._id)}
+                      className="delete-button"
+                    >
                       Delete
                     </button>
                   </div>
@@ -431,10 +437,16 @@ const Home = () => {
                     <p>{expense.description}</p>
                   </div>
                   <div className="action-buttons">
-                    <button onClick={() => handleExpenseEdit(expense)} className="edit-button">
+                    <button
+                      onClick={() => handleExpenseEdit(expense)}
+                      className="edit-button"
+                    >
                       Edit
                     </button>
-                    <button onClick={() => handleExpenseDelete(expense._id)} className="delete-button">
+                    <button
+                      onClick={() => handleExpenseDelete(expense._id)}
+                      className="delete-button"
+                    >
                       Delete
                     </button>
                   </div>
@@ -458,9 +470,21 @@ const Home = () => {
               <div className="summary-card">
                 <h3>Balance</h3>
                 <p>
-                  $ {(calculateTotal(incomes) - calculateTotal(expenses)).toFixed(2)}
+                  ${" "}
+                  {(calculateTotal(incomes) - calculateTotal(expenses)).toFixed(
+                    2
+                  )}
                 </p>
               </div>
+            </div>
+            <div className="visualization-section">
+              <h3 className="visualization-heading">Visualization</h3>
+              <select className="visualization-dropdown">
+                <option value="this-week">This Week</option>
+                <option value="this-month">This Month</option>
+                <option value="this-year">This Year</option>
+                <option value="all">All</option>
+              </select>
             </div>
           </div>
         )}
