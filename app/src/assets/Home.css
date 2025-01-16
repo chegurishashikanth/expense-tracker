@@ -1,4 +1,4 @@
-body { 
+body {
   background-color: white;
   color: black;
   margin: 0;
@@ -72,6 +72,15 @@ body {
   background-color: #d9363e;
 }
 
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row input {
+  flex: 1;
+}
+
 .content {
   margin-left: 240px;
   padding: 20px;
@@ -127,35 +136,49 @@ button:hover {
   background-color: #0056b3;
 }
 
-.income-section, .expense-section {
+.income-section,
+.expense-section {
   display: flex;
+  flex-direction: column; /* Change to column to stack form and list */
   gap: 20px;
 }
 
-.income-form, .expense-form {
-  width: 40%;
-  background-color: #f8f9fb;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.income-form,
+.expense-form {
+  width: 100%; /* Full width for the form */
 }
 
-.income-list, .expense-list {
-  width: 60%;
-  max-height: 400px; /* Set a maximum height */
-  overflow-y: auto;  /* Make only the list scrollable */
+.income-list,
+.expense-list {
+  width: 100%; /* Full width for the list */
+  max-height: 200px; /* Reduced height for the list */
+  overflow-y: auto; /* Scrollable when content exceeds height */
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.total-summary {
-  font-weight: bold;
-  margin-bottom: 10px;
+.income-form-container,
+.expense-form-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
 }
 
-.income-item, .expense-item {
+.total-summary {
+  flex: 1;
+  padding: 10px;
+  background-color: #f0f0f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.income-item,
+.expense-item {
+  display: flex;
+  flex-direction: column; /* Stack the name and details vertically */
+  gap: 10px; /* Add spacing between name and details */
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #e0e0e0;
@@ -163,8 +186,67 @@ button:hover {
   background-color: #f8f9fb;
 }
 
+.income-name,
+.expense-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.income-details,
+.expense-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.income-details p,
+.expense-details p {
+  margin: 0;
+  flex: 1; /* Distribute space equally */
+  text-align: center; /* Center all details */
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+
+.income-item h4,
+.expense-item h4 {
+  flex: 1;
+  margin: 0;
+}
+
+.income-item p,
+.expense-item p {
+  flex: 1;
+  margin: 0;
+  text-align: left;
+}
+
+.income-item p:first-child,
+.expense-item p:first-child {
+  text-align: left;
+}
+
+.income-item p:nth-child(2),
+.expense-item p:nth-child(2) {
+  text-align: center;
+}
+
+.income-item p:last-child,
+.expense-item p:last-child {
+  text-align: right;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
 .action-buttons button {
-  margin-right: 10px;
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
@@ -222,7 +304,7 @@ button:hover {
 }
 
 .summary-item:not(:last-child)::after {
-  content: '';
+  content: "";
   position: absolute;
   right: 0;
   top: 50%;
